@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Reporte General de Eventos y Estados - Módulo Integrante 1
+  Plantilla JasperReports profesional con diseño estilizado.
+  Los datos se suministran desde Java mediante un JRBeanCollectionDataSource
+  de objetos com.prehackaton.eventos.model.Evento (capa DAO).
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+                                  http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="ReporteGeneralEventosProfesional"
+              pageWidth="842"
+              pageHeight="595"
+              orientation="Landscape"
+              columnWidth="782"
+              leftMargin="30"
+              rightMargin="30"
+              topMargin="30"
+              bottomMargin="30"
+              whenNoDataType="AllSectionsNoDetail">
+
+    <!-- Estilos a nivel de reporte (orden XSD: style antes de parameter/field) -->
+    <style name="TituloPrincipal" fontName="SansSerif" fontSize="22" isBold="true" forecolor="#1a237e"/>
+    <style name="Subtitulo" fontName="SansSerif" fontSize="12" isItalic="true" forecolor="#546e7a"/>
+    <style name="CabeceraTabla" fontName="SansSerif" fontSize="10" isBold="true" forecolor="#ffffff"/>
+    <style name="Detalle" fontName="SansSerif" fontSize="10" forecolor="#263238"/>
+    <style name="PiePagina" fontName="SansSerif" fontSize="9" isItalic="true" forecolor="#78909c"/>
+    <style name="FilaImpar" mode="Opaque" backcolor="#ffffff"/>
+    <style name="FilaPar" mode="Opaque" backcolor="#f5f5f5"/>
+
+    <!-- Parámetros -->
+    <parameter name="REPORT_TITLE" class="java.lang.String"/>
+    <parameter name="SUBTITLE" class="java.lang.String"/>
+
+    <!-- Campos mapeados a las propiedades de la entidad Evento -->
+    <field name="idEvento" class="java.lang.Integer"/>
+    <field name="nombre" class="java.lang.String"/>
+    <field name="descripcion" class="java.lang.String"/>
+    <field name="fecha" class="java.time.LocalDate"/>
+    <field name="lugar" class="java.lang.String"/>
+    <field name="modalidad" class="java.lang.String"/>
+    <field name="estado" class="java.lang.String"/>
+
+    <!-- Contador de filas para fondo alternado -->
+    <variable name="ROW_COUNT" class="java.lang.Integer" calculation="Count"/>
+
+    <!-- ===================== TÍTULO ===================== -->
+    <title>
+        <band height="100">
+            <!-- Línea decorativa superior -->
+            <line>
+                <reportElement x="0" y="0" width="782" height="2"/>
+                <graphicElement>
+                    <pen lineWidth="1.5" lineColor="#1a237e"/>
+                </graphicElement>
+            </line>
+            <!-- Rectángulo de fondo para el título -->
+            <rectangle>
+                <reportElement x="0" y="8" width="782" height="44"/>
+            </rectangle>
+            <!-- TÍTULO PRINCIPAL (texto embebido, no depende de parámetros) -->
+            <staticText>
+                <reportElement x="10" y="12" width="762" height="24" style="TituloPrincipal"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <text><![CDATA[Reporte General de Eventos y Estados]]></text>
+            </staticText>
+            <!-- SUBTÍTULO (texto embebido) -->
+            <staticText>
+                <reportElement x="10" y="38" width="762" height="14" style="Subtitulo"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <text><![CDATA[Módulo Integrante 1 - Gestión de Eventos]]></text>
+            </staticText>
+            <!-- Línea decorativa inferior del título -->
+            <line>
+                <reportElement x="0" y="54" width="782" height="2"/>
+                <graphicElement>
+                    <pen lineWidth="1" lineColor="#1a237e"/>
+                </graphicElement>
+            </line>
+        </band>
+    </title>
+
+    <!-- ===================== ENCABEZADO DE PÁGINA ===================== -->
+    <pageHeader>
+        <band height="25">
+            <textField>
+                <reportElement x="0" y="5" width="782" height="16" style="PiePagina"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Generado: " + new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm").format(new java.util.Date())]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="0" y="22" width="782" height="1"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#b0bec5"/>
+                </graphicElement>
+            </line>
+        </band>
+    </pageHeader>
+
+    <!-- ===================== CABECERA DE COLUMNAS ===================== -->
+    <columnHeader>
+        <band height="28">
+            <!-- Fondo de la cabecera -->
+            <rectangle>
+                <reportElement x="0" y="0" width="782" height="28"/>
+            </rectangle>
+            <!-- Línea inferior de la cabecera -->
+            <line>
+                <reportElement x="0" y="27" width="782" height="1"/>
+                <graphicElement>
+                    <pen lineWidth="1" lineColor="#1a237e"/>
+                </graphicElement>
+            </line>
+            <!-- ID -->
+            <staticText>
+                <reportElement x="5" y="2" width="40" height="24" style="CabeceraTabla"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[ID]]></text>
+            </staticText>
+            <!-- Nombre -->
+            <staticText>
+                <reportElement x="45" y="2" width="160" height="24" style="CabeceraTabla"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <text><![CDATA[Nombre]]></text>
+            </staticText>
+            <!-- Descripción -->
+            <staticText>
+                <reportElement x="205" y="2" width="260" height="24" style="CabeceraTabla"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <text><![CDATA[Descripción]]></text>
+            </staticText>
+            <!-- Fecha -->
+            <staticText>
+                <reportElement x="465" y="2" width="90" height="24" style="CabeceraTabla"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Fecha]]></text>
+            </staticText>
+            <!-- Lugar -->
+            <staticText>
+                <reportElement x="555" y="2" width="100" height="24" style="CabeceraTabla"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <text><![CDATA[Lugar]]></text>
+            </staticText>
+            <!-- Modalidad -->
+            <staticText>
+                <reportElement x="655" y="2" width="70" height="24" style="CabeceraTabla"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <text><![CDATA[Modalidad]]></text>
+            </staticText>
+            <!-- Estado -->
+            <staticText>
+                <reportElement x="725" y="2" width="57" height="24" style="CabeceraTabla"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <text><![CDATA[Estado]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <!-- ===================== DETALLE (TABLA) ===================== -->
+    <detail>
+        <band height="26">
+            <!-- Fondo fila impar (blanco) -->
+            <rectangle>
+                <reportElement x="0" y="0" width="782" height="26" style="FilaImpar">
+                    <printWhenExpression><![CDATA[$V{ROW_COUNT} % 2 == 1]]></printWhenExpression>
+                </reportElement>
+            </rectangle>
+            <!-- Fondo fila par (gris claro) -->
+            <rectangle>
+                <reportElement x="0" y="0" width="782" height="26" style="FilaPar">
+                    <printWhenExpression><![CDATA[$V{ROW_COUNT} % 2 == 0]]></printWhenExpression>
+                </reportElement>
+            </rectangle>
+            <!-- Línea divisoria horizontal (no encima de las letras) -->
+            <line>
+                <reportElement x="0" y="25" width="782" height="1"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#eceff1"/>
+                </graphicElement>
+            </line>
+            <!-- ID -->
+            <textField>
+                <reportElement x="5" y="2" width="40" height="22" style="Detalle"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{idEvento}]]></textFieldExpression>
+            </textField>
+            <!-- Nombre -->
+            <textField>
+                <reportElement x="45" y="2" width="160" height="22" style="Detalle"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+            </textField>
+            <!-- Descripción -->
+            <textField>
+                <reportElement x="205" y="2" width="260" height="22" style="Detalle"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+            </textField>
+            <!-- Fecha -->
+            <textField>
+                <reportElement x="465" y="2" width="90" height="22" style="Detalle"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+            </textField>
+            <!-- Lugar -->
+            <textField>
+                <reportElement x="555" y="2" width="100" height="22" style="Detalle"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{lugar}]]></textFieldExpression>
+            </textField>
+            <!-- Modalidad -->
+            <textField>
+                <reportElement x="655" y="2" width="70" height="22" style="Detalle"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{modalidad}]]></textFieldExpression>
+            </textField>
+            <!-- Estado -->
+            <textField>
+                <reportElement x="705" y="2" width="77" height="16" style="Detalle"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <!-- ===================== PIE DE PÁGINA ===================== -->
+    <pageFooter>
+        <band height="28">
+            <line>
+                <reportElement x="0" y="2" width="782" height="1"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#b0bec5"/>
+                </graphicElement>
+            </line>
+            <textField>
+                <reportElement x="0" y="8" width="782" height="14" style="PiePagina"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="12" width="782" height="12" style="PiePagina"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Sistema de Gestión de Eventos • Arquitectura MVC + DAO • JavaFX + MySQL + JasperReports"]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+
+</jasperReport>

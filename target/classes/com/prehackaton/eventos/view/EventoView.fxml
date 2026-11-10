@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.Region?>
+
+<BorderPane fx:controller="com.prehackaton.eventos.controller.EventoController"
+            xmlns:fx="http://javafx.com/fxml"
+            stylesheets="/com/prehackaton/eventos/style.css">
+
+    <!-- ============================ REGIÓN SUPERIOR ============================ -->
+    <top>
+        <VBox styleClass="top-bar" spacing="6">
+            <padding>
+                <Insets top="16" right="24" bottom="16" left="24"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Rectangle width="8" height="28" fill="#3f51b5"/>
+                <VBox spacing="2">
+                    <Label text="Gestión de Eventos" styleClass="app-title"/>
+                    <Label text="Módulo Integrante 1 • CRUD + Reporte JasperReports" styleClass="app-subtitle"/>
+                </VBox>
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                <Label fx:id="lblFechaHora" text="--" styleClass="meta-label"/>
+                <Label text="|" styleClass="meta-separator"/>
+                <Label fx:id="lblContador" text="Total de eventos: 0" styleClass="meta-label"/>
+                <Button fx:id="btnReporte" text="📄 Generar Reporte" styleClass="action-button primary-button" onAction="#handleReporte"/>
+            </HBox>
+            <Separator styleClass="divider"/>
+        </VBox>
+    </top>
+
+    <!-- ============================ REGIÓN CENTRAL ============================ -->
+    <center>
+        <HBox spacing="20">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="24"/>
+            </padding>
+
+            <!-- Formulario de ingreso / edición (izquierda - tarjeta) -->
+            <VBox spacing="16" prefWidth="380" maxWidth="400" styleClass="card">
+                <children>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Rectangle width="6" height="20" fill="#2e7d32"/>
+                        <Label text="Datos del evento" styleClass="card-title"/>
+                    </HBox>
+                    <Separator styleClass="card-divider"/>
+
+                    <GridPane hgap="12" vgap="12">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="35"/>
+                            <ColumnConstraints percentWidth="65"/>
+                        </columnConstraints>
+
+                        <Label text="Nombre:*" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="txtNombre" promptText="Ej. Conferencia JavaFX 2026" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                        <Label text="Descripción:" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextArea fx:id="txtDescripcion" prefRowCount="3" wrapText="true" promptText="Detalles del evento..." GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                        <Label text="Fecha:*" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <DatePicker fx:id="fechaPicker" promptText="Seleccionar fecha" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                        <Label text="Lugar:*" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="txtLugar" promptText="Ej. Auditorio Principal" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                        <Label text="Modalidad:*" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <ComboBox fx:id="cbModalidad" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                        <Label text="Estado:*" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <ComboBox fx:id="cbEstado" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    </GridPane>
+
+                    <HBox spacing="10">
+                        <Button fx:id="btnGuardar" text="💾 Guardar" styleClass="action-button success-button" onAction="#handleGuardar" maxWidth="Infinity"/>
+                        <Button fx:id="btnActualizar" text="✏️ Actualizar" styleClass="action-button info-button" disable="true" onAction="#handleActualizar" maxWidth="Infinity"/>
+                    </HBox>
+                    <HBox spacing="10">
+                        <Button fx:id="btnEliminar" text="🗑️ Eliminar" styleClass="action-button danger-button" disable="true" onAction="#handleEliminar" maxWidth="Infinity"/>
+                        <Button fx:id="btnLimpiar" text="🧹 Limpiar" styleClass="action-button ghost-button" onAction="#handleLimpiar" maxWidth="Infinity"/>
+                    </HBox>
+                    <Button fx:id="btnNuevo" text="➕ Nuevo" styleClass="action-button accent-button" onAction="#handleNuevo" maxWidth="Infinity"/>
+
+                    <Label text="* Campos obligatorios" styleClass="hint-label"/>
+                </children>
+            </VBox>
+
+            <!-- Listado en tabla (derecha - tarjeta) -->
+            <VBox spacing="12" HBox.hgrow="ALWAYS" styleClass="card">
+                <children>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Rectangle width="6" height="20" fill="#1a237e"/>
+                        <Label text="Listado de Eventos" styleClass="card-title"/>
+                    </HBox>
+                    <Separator styleClass="card-divider"/>
+
+                    <TableView fx:id="tablaEventos" VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                            <TableColumn fx:id="colNombre" text="Nombre" prefWidth="170"/>
+                            <TableColumn fx:id="colDescripcion" text="Descripción" prefWidth="220"/>
+                            <TableColumn fx:id="colFecha" text="Fecha" prefWidth="90"/>
+                            <TableColumn fx:id="colLugar" text="Lugar" prefWidth="130"/>
+                            <TableColumn fx:id="colModalidad" text="Modalidad" prefWidth="90"/>
+                            <TableColumn fx:id="colEstado" text="Estado" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                </children>
+            </VBox>
+        </HBox>
+    </center>
+
+    <!-- ============================ REGIÓN INFERIOR ============================ -->
+    <bottom>
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="14" right="24" bottom="14" left="24"/>
+            </padding>
+            <Separator styleClass="divider"/>
+            <Label text="Sistema de Gestión de Eventos • Arquitectura MVC + DAO • JavaFX + MySQL + JasperReports" styleClass="footer-label"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

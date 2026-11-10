@@ -1,0 +1,274 @@
+/* =============================================================================
+   Hoja de estilos profesional - Módulo Integrante 1: Gestión de Eventos
+   Diseño moderno, limpio y profesional (JavaFX)
+   ============================================================================= */
+
+.root {
+    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    -fx-base: #f8f9fa;
+    -fx-background: #f8f9fa;
+}
+
+/* ---------------------------------------------------------------
+   BARRA SUPERIOR
+   --------------------------------------------------------------- */
+.top-bar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent transparent #e2e8f0 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.app-title {
+    -fx-text-fill: #1a237e;
+    -fx-font-size: 21px;
+    -fx-font-weight: 800;
+}
+
+.app-subtitle {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 12.5px;
+}
+
+.meta-label {
+    -fx-text-fill: #475569;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+}
+
+.meta-separator {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 13px;
+}
+
+.divider {
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-insets: 8 0 8 0;
+}
+
+/* ---------------------------------------------------------------
+   TARJETAS (Cards)
+   --------------------------------------------------------------- */
+.card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-padding: 18;
+}
+
+.card-title {
+    -fx-text-fill: #1a237e;
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+}
+
+.card-divider {
+    -fx-border-color: #f1f5f9;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-insets: 6 0 10 0;
+}
+
+/* ---------------------------------------------------------------
+   ETIQUETAS DE CAMPOS
+   --------------------------------------------------------------- */
+.field-label {
+    -fx-text-fill: #475569;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+}
+
+.hint-label {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 12px;
+    -fx-font-style: italic;
+}
+
+.footer-label {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 12px;
+}
+
+/* ---------------------------------------------------------------
+   TABLA DE DATOS
+   --------------------------------------------------------------- */
+.data-table {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-table-cell-border-color: #f1f5f9;
+    -fx-padding: 4;
+}
+
+.data-table .column-header {
+    -fx-background-color: #1a237e;
+    -fx-text-fill: white;
+    -fx-font-size: 12.5px;
+    -fx-font-weight: 700;
+}
+
+.data-table .column-header .label {
+    -fx-text-fill: white;
+}
+
+.data-table .column-header:last-visible {
+    -fx-border-color: transparent;
+}
+
+.data-table .row-cell {
+    -fx-background-color: #ffffff;
+}
+
+.data-table .row-cell:filled:selected {
+    -fx-background-color: #e8eaf6;
+    -fx-text-fill: #1a237e;
+}
+
+.data-table .cell {
+    -fx-font-size: 13px;
+    -fx-padding: 8 10 8 10;
+    -fx-text-fill: #334155;
+}
+
+.data-table .row-cell:even {
+    -fx-background-color: #f8fafc;
+}
+
+/* ---------------------------------------------------------------
+   CAMPOS DE FORMULARIO
+   --------------------------------------------------------------- */
+.text-field, .text-area, .date-picker, .combo-box {
+    -fx-font-size: 13px;
+    -fx-text-fill: #334155;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.text-field:focused, .text-area:focused, .date-picker:focused, .combo-box:focused {
+    -fx-border-color: #1a237e;
+    -fx-border-width: 1.5;
+}
+
+.text-area {
+    -fx-background-color: #ffffff;
+}
+
+.combo-box .list-cell {
+    -fx-font-size: 13px;
+}
+
+.combo-box .list-cell:filled:selected {
+    -fx-background-color: #1a237e;
+    -fx-text-fill: white;
+}
+
+/* ---------------------------------------------------------------
+   BOTONES
+   --------------------------------------------------------------- */
+.action-button {
+    -fx-min-height: 38px;
+    -fx-pref-height: 38px;
+    -fx-max-height: 38px;
+    -fx-font-size: 13.5px;
+    -fx-font-weight: 700;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER;
+}
+
+.action-button:hover {
+    -fx-opacity: 0.92;
+}
+
+.action-button:pressed {
+    -fx-opacity: 0.85;
+}
+
+.action-button:disabled {
+    -fx-opacity: 0.5;
+    -fx-cursor: default;
+}
+
+.action-button .text {
+    -fx-fill: white;
+}
+
+.primary-button {
+    -fx-background-color: #3f51b5;
+}
+.primary-button:hover {
+    -fx-background-color: #303f9f;
+}
+
+.success-button {
+    -fx-background-color: #2e7d32;
+}
+.success-button:hover {
+    -fx-background-color: #1b5e20;
+}
+
+.info-button {
+    -fx-background-color: #0288d1;
+}
+.info-button:hover {
+    -fx-background-color: #01579b;
+}
+
+.danger-button {
+    -fx-background-color: #c62828;
+}
+.danger-button:hover {
+    -fx-background-color: #b71c1c;
+}
+
+.ghost-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #475569;
+    -fx-border-color: #94a3b8;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+}
+.ghost-button:hover {
+    -fx-background-color: #f1f5f9;
+    -fx-text-fill: #1a237e;
+}
+
+.accent-button {
+    -fx-background-color: #7b1fa2;
+}
+.accent-button:hover {
+    -fx-background-color: #6a1b9a;
+}
+
+/* ---------------------------------------------------------------
+   ALERTS / DIÁLOGOS
+   --------------------------------------------------------------- */
+.dialog-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+}
+
+.dialog-pane .header-panel {
+    -fx-padding: 16 16 8 16;
+}
+
+.dialog-pane .label {
+    -fx-text-fill: #334155;
+    -fx-font-size: 14px;
+}
+
+.dialog-pane .button {
+    -fx-min-height: 34px;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
