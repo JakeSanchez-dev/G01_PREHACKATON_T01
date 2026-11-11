@@ -1,3 +1,4 @@
+
 package com.prehackaton.eventos.util;
 
 import java.sql.Connection;
@@ -9,17 +10,14 @@ import java.sql.Statement;
 /**
  * Clase de conexión JDBC reutilizable en la capa util.
  *
- * Proporciona una conexión única a la base de datos MySQL db_eventos y
- * métodos de cierre seguro de recursos JDBC.
- *
- * NOTA: Las credenciales están definidas como constantes para facilitar la
- * prueba en el entorno del pre-hackatón. En entorno productivo se recomienda
- * externalizarlas (archivo .properties / variables de entorno).
+ * Proporciona una conexión a la base de datos MySQL db_eventos
+ * y métodos de cierre seguro de recursos JDBC.
  */
 public final class DBConnection {
 
     private static final String URL =
-            "jdbc:mysql://localhost:3306/db_eventos?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+            "jdbc:mysql://localhost:3307/db_eventos?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+
     private static final String USER = "root";
     private static final String PASSWORD = "secret123";
 
@@ -29,22 +27,24 @@ public final class DBConnection {
         // Clase de utilidad: no se instancia
     }
 
-    /**
-     * Obtiene (y reutiliza) la conexión JDBC a la base de datos.
-     *
-     * @return Connection abierta
-     * @throws SQLException si no se puede establecer la conexión
-     */
-    public static Connection getConnection() throws SQLException {
-        if (conn == null || conn.isClosed()) {
+    public static synchronized Connection getConnection() throws SQLException {
+        if (conn == null || conn.isClosed() || !conn.isValid(3)) {
+            cerrarConexion();
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
         }
         return conn;
     }
 
-    /**
-     * Cierra una conexión de forma segura.
-     */
+    public static void cerrarConexion() {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ignored) {
+            }
+            conn = null;
+        }
+    }
+
     public static void close(Connection conn) {
         if (conn != null) {
             try {
@@ -54,17 +54,11 @@ public final class DBConnection {
         }
     }
 
-    /**
-     * Cierra una conexión y un statement de forma segura.
-     */
     public static void close(Connection conn, Statement stmt) {
         close(stmt);
         close(conn);
     }
 
-    /**
-     * Cierra conexión, statement y resultSet de forma segura.
-     */
     public static void close(Connection conn, Statement stmt, ResultSet rs) {
         close(rs);
         close(stmt);

@@ -1,6 +1,4 @@
-package com.prehackaton.eventos.dao;
-
-import com.prehackaton.eventos.model.Evento;
+package com.prehackaton.eventos.model;
 
 import java.util.List;
 

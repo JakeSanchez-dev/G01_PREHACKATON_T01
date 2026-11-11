@@ -1,14 +1,13 @@
 package com.prehackaton.eventos.controller;
 
-import com.prehackaton.eventos.dao.EventoDAO;
-import com.prehackaton.eventos.dao.EventoDAOImpl;
+import com.prehackaton.eventos.model.EventoDAO;
+import com.prehackaton.eventos.model.EventoDAOImpl;
 import com.prehackaton.eventos.model.Evento;
 import com.prehackaton.eventos.util.ReportUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -69,7 +68,7 @@ public class EventoController {
 
     /** Inicializa el controlador: columnas, combos, datos y listeners. */
     @FXML
-    public void inicializar() {
+    public void initialize() {
         configurarColumnas();
         cargarComboBoxes();
         cargarTabla();

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="reporte_participantes"
+              pageWidth="842" pageHeight="595"
+              orientation="Landscape"
+              columnWidth="802"
+              leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20">
+
+    <parameter name="TITULO" class="java.lang.String"/>
+
+    <field name="idParticipante" class="java.lang.Integer"/>
+    <field name="nombres" class="java.lang.String"/>
+    <field name="apellidos" class="java.lang.String"/>
+    <field name="dni" class="java.lang.String"/>
+    <field name="correo" class="java.lang.String"/>
+    <field name="telefono" class="java.lang.String"/>
+    <field name="institucion" class="java.lang.String"/>
+
+    <title>
+        <band height="65">
+            <staticText>
+                <reportElement x="0" y="0" width="802" height="25"/>
+                <textElement textAlignment="Center">
+                    <font size="17" isBold="true"/>
+                </textElement>
+                <text><![CDATA[REPORTE DE PARTICIPANTES]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="0" y="32" width="802" height="20"/>
+                <textElement textAlignment="Center">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{TITULO}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="28">
+            <staticText>
+                <reportElement x="0" y="0" width="35" height="25" backcolor="#D9EAF7" mode="Opaque"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="35" y="0" width="105" height="25" backcolor="#D9EAF7" mode="Opaque"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Nombres]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="140" y="0" width="115" height="25" backcolor="#D9EAF7" mode="Opaque"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Apellidos]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="255" y="0" width="75" height="25" backcolor="#D9EAF7" mode="Opaque"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[DNI]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="330" y="0" width="170" height="25" backcolor="#D9EAF7" mode="Opaque"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Correo]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="500" y="0" width="100" height="25" backcolor="#D9EAF7" mode="Opaque"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Teléfono]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="600" y="0" width="202" height="25" backcolor="#D9EAF7" mode="Opaque"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Institución]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="23">
+            <textField>
+                <reportElement x="0" y="0" width="35" height="22"/>
+                <textFieldExpression><![CDATA[$F{idParticipante}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="35" y="0" width="105" height="22"/>
+                <textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="140" y="0" width="115" height="22"/>
+                <textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="255" y="0" width="75" height="22"/>
+                <textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="330" y="0" width="170" height="22"/>
+                <textFieldExpression><![CDATA[$F{correo}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="500" y="0" width="100" height="22"/>
+                <textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="600" y="0" width="202" height="22"/>
+                <textFieldExpression><![CDATA[$F{institucion}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+</jasperReport>

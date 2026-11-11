@@ -1,6 +1,5 @@
-package com.prehackaton.eventos.dao;
+package com.prehackaton.eventos.model;
 
-import com.prehackaton.eventos.model.Evento;
 import com.prehackaton.eventos.util.DBConnection;
 
 import java.sql.Connection;
@@ -192,6 +191,8 @@ public class EventoDAOImpl implements EventoDAO {
 
     @Override
     public void cerrar() {
-        DBConnection.close(conn);
+        // La conexión es ÚNICA y compartida por todos los módulos de la
+        // aplicación (Eventos y Participantes): cerrarla aquí rompería el
+        // CRUD de las demás pestañas. Se cierra al finalizar la aplicación.
     }
 }

@@ -37,5 +37,29 @@ INSERT INTO eventos (nombre, descripcion, fecha, lugar, modalidad, estado) VALUE
 ('Seminario de Ciberseguridad', 'Charlas sobre seguridad en aplicaciones web.', '2026-10-20', 'Salón de Eventos', 'Presencial', 'Completado');
 
 -- =============================================================================
+-- Tabla de participantes (módulo Integrante 2)
+-- id_participante : PK auto-incremental
+-- dni             : único (respalda el control de duplicados de la app)
+-- =============================================================================
+CREATE TABLE IF NOT EXISTS participantes (
+    id_participante INT NOT NULL AUTO_INCREMENT,
+    nombres         VARCHAR(100) NOT NULL,
+    apellidos       VARCHAR(100) NOT NULL,
+    dni             VARCHAR(8)  NOT NULL,
+    correo          VARCHAR(100) NOT NULL,
+    telefono        VARCHAR(15),
+    institucion     VARCHAR(150) NOT NULL,
+    PRIMARY KEY (id_participante),
+    UNIQUE KEY uk_dni (dni)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Datos de ejemplo para pruebas del listado y del reporte
+INSERT INTO participantes (nombres, apellidos, dni, correo, telefono, institucion) VALUES
+('María',  'Torres Quispe',   '71234567', 'maria.torres@ejemplo.com',     '987654321', 'Universidad Nacional'),
+('Carlos', 'Rojas Mendoza',   '70876543', 'carlos.rojas@ejemplo.com',    '912345678', 'Instituto Tecnológico'),
+('Lucía',  'Fernández Soto',  '72546389', 'lucia.fernandez@ejemplo.com', '945612378', 'Universidad Nacional'),
+('Andrés', 'Chávez Ríos',     '73322110', 'andres.chavez@ejemplo.com',   NULL,         'Colegio Independencia');
+
+-- =============================================================================
 -- Fin del script
 -- =============================================================================

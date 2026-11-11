@@ -91,7 +91,7 @@
 }
 
 /* ---------------------------------------------------------------
-   TABLA DE DATOS
+   TABLA DE DATOS (Corregida para visibilidad de texto)
    --------------------------------------------------------------- */
 .data-table {
     -fx-background-color: #ffffff;
@@ -104,7 +104,6 @@
 
 .data-table .column-header {
     -fx-background-color: #1a237e;
-    -fx-text-fill: white;
     -fx-font-size: 12.5px;
     -fx-font-weight: 700;
 }
@@ -121,19 +120,24 @@
     -fx-background-color: #ffffff;
 }
 
-.data-table .row-cell:filled:selected {
-    -fx-background-color: #e8eaf6;
-    -fx-text-fill: #1a237e;
+.data-table .row-cell:even {
+    -fx-background-color: #f8fafc;
 }
 
+/* Texto oscuro en celdas para asegurar visibilidad */
 .data-table .cell {
     -fx-font-size: 13px;
     -fx-padding: 8 10 8 10;
-    -fx-text-fill: #334155;
+    -fx-text-fill: #1e293b;
 }
 
-.data-table .row-cell:even {
-    -fx-background-color: #f8fafc;
+/* Estado seleccionado de la fila */
+.data-table .row-cell:filled:selected {
+    -fx-background-color: #e8eaf6;
+}
+
+.data-table .row-cell:filled:selected .cell {
+    -fx-text-fill: #1a237e;
 }
 
 /* ---------------------------------------------------------------
@@ -271,4 +275,40 @@
     -fx-font-weight: 600;
     -fx-background-radius: 8;
     -fx-border-radius: 8;
+}
+
+/* ---------------------------------------------------------------
+   PESTAÑAS DE NAVEGACIÓN ENTRE MÓDULOS (TabPane unificado)
+   --------------------------------------------------------------- */
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: #1a237e;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10 10 0 0;
+    -fx-padding: 9 20 9 20;
+    -fx-cursor: hand;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:hover {
+    -fx-background-color: #283593;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: #f8f9fa;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab .tab-label {
+    -fx-text-fill: #c5cae9;
+    -fx-font-size: 13.5px;
+    -fx-font-weight: 700;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected .tab-label {
+    -fx-text-fill: #1a237e;
+}
+
+.tab-pane > .tab-content-area {
+    -fx-background-color: #f8f9fa;
 }

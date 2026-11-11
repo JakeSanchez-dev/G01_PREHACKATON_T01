@@ -1,49 +1,25 @@
 package com.prehackaton.eventos;
 
-import com.prehackaton.eventos.controller.EventoController;
-import com.prehackaton.eventos.dao.EventoDAO;
-import com.prehackaton.eventos.dao.EventoDAOImpl;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
- * Punto de entrada de la aplicación JavaFX del módulo Integrante 1:
- * Gestión de Eventos (CRUD + Reporte JasperReports).
+ * Punto de entrada de la aplicación (clase ejecutable).
+ *
+ * ¿Por qué esta clase NO extiende javafx.application.Application?
+ * Porque el JDK se niega a ejecutar directamente una clase que extiende
+ * Application cuando JavaFX está en el classpath (dependencias Maven) y no
+ * en el module-path, produciendo el error:
+ *
+ *   "Error: JavaFX runtime components are missing, and are required
+ *    to run this application"
+ *
+ * La ventana JavaFX vive en App.java; desde aquí solo se lanza.
+ * Ejecutar "Run 'Main'" en IntelliJ funciona sin configurar nada extra,
+ * igual que en consola (java -cp ...) y con Maven (mvn javafx:run).
  */
-public class Main extends Application {
-
-    private static final String FXML_VIEW_PATH =
-            "/com/prehackaton/eventos/view/EventoView.fxml";
-
-    @Override
-    public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_VIEW_PATH));
-        Parent root = loader.load();
-
-        EventoController controller = loader.getController();
-        controller.inicializar();
-
-        Scene scene = new Scene(root);
-        // Hoja de estilos de la aplicación
-        String css = getClass().getResource("/com/prehackaton/eventos/style.css").toExternalForm();
-        scene.getStylesheets().add(css);
-
-        primaryStage.setTitle("Gestión de Eventos - Integrante 1 (MVC + DAO)");
-        primaryStage.setScene(scene);
-        primaryStage.setMinWidth(1000);
-        primaryStage.setMinHeight(650);
-        primaryStage.show();
-
-        // Cerrar la conexión DAO al cerrar la ventana
-        primaryStage.setOnCloseRequest(event -> controller.cerrar());
-    }
+public class Main {
 
     public static void main(String[] args) {
-        launch(args);
+        Application.launch(App.class, args);
     }
 }

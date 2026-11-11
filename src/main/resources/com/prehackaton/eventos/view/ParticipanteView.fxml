@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.Region?>
+
+<BorderPane fx:controller="com.prehackaton.eventos.controller.ParticipanteController"
+            xmlns:fx="http://javafx.com/fxml"
+            stylesheets="/com/prehackaton/eventos/style.css">
+
+    <!-- ============================ REGIÓN SUPERIOR ============================ -->
+    <top>
+        <VBox styleClass="top-bar" spacing="6">
+            <padding>
+                <Insets top="16" right="24" bottom="16" left="24"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Rectangle width="8" height="28" fill="#7b1fa2"/>
+                <VBox spacing="2">
+                    <Label text="Gestión de Participantes" styleClass="app-title"/>
+                    <Label text="Módulo Integrante 2 • CRUD + Reporte JasperReports" styleClass="app-subtitle"/>
+                </VBox>
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                <TextField fx:id="txtBuscar" promptText="Buscar por nombre, DNI o institución..."
+                          HBox.hgrow="ALWAYS" maxWidth="360"/>
+                <Button text="🔍 Buscar" styleClass="action-button primary-button" onAction="#handleBuscar"/>
+                <Button text="📋 Mostrar todos" styleClass="action-button ghost-button" onAction="#handleMostrarTodos"/>
+            </HBox>
+            <Separator styleClass="divider"/>
+        </VBox>
+    </top>
+
+    <!-- ============================ REGIÓN CENTRAL ============================ -->
+    <center>
+        <HBox spacing="20">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="24"/>
+            </padding>
+
+            <!-- Formulario de ingreso / edición (izquierda - tarjeta) -->
+            <VBox spacing="16" prefWidth="380" maxWidth="400" styleClass="card">
+                <children>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Rectangle width="6" height="20" fill="#2e7d32"/>
+                        <Label text="Datos del participante" styleClass="card-title"/>
+                    </HBox>
+                    <Separator styleClass="card-divider"/>
+
+                    <GridPane hgap="12" vgap="12">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="32"/>
+                            <ColumnConstraints percentWidth="68"/>
+                        </columnConstraints>
+
+                        <Label text="Nombres:*" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="txtNombres" promptText="Ej. María" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                        <Label text="Apellidos:*" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="txtApellidos" promptText="Ej. Torres Quispe" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                        <Label text="DNI:*" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="txtDni" promptText="8 dígitos" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                        <Label text="Correo:*" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="txtCorreo" promptText="correo@ejemplo.com" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                        <Label text="Teléfono:" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <TextField fx:id="txtTelefono" promptText="Opcional (7-15 dígitos)" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                        <Label text="Institución:*" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <TextField fx:id="txtInstitucion" promptText="Ej. Universidad Nacional" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    </GridPane>
+
+                    <HBox spacing="10">
+                        <Button text="💾 Guardar" styleClass="action-button success-button" onAction="#handleGuardar" maxWidth="Infinity"/>
+                        <Button text="✏️ Actualizar" styleClass="action-button info-button" onAction="#handleActualizar" maxWidth="Infinity"/>
+                    </HBox>
+                    <HBox spacing="10">
+                        <Button text="🗑️ Eliminar" styleClass="action-button danger-button" onAction="#handleEliminar" maxWidth="Infinity"/>
+                        <Button text="🧹 Limpiar" styleClass="action-button ghost-button" onAction="#handleLimpiar" maxWidth="Infinity"/>
+                    </HBox>
+                    <Button text="📄 Generar Reporte" styleClass="action-button primary-button" onAction="#handleReporte" maxWidth="Infinity"/>
+
+                    <Label text="* Campos obligatorios (teléfono es opcional)" styleClass="hint-label"/>
+                </children>
+            </VBox>
+
+            <!-- Listado en tabla (derecha - tarjeta) -->
+            <VBox spacing="12" HBox.hgrow="ALWAYS" styleClass="card">
+                <children>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Rectangle width="6" height="20" fill="#1a237e"/>
+                        <Label text="Listado de Participantes" styleClass="card-title"/>
+                    </HBox>
+                    <Separator styleClass="card-divider"/>
+
+                    <TableView fx:id="tablaParticipantes" VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="colId" text="ID" prefWidth="55"/>
+                            <TableColumn fx:id="colNombres" text="Nombres" prefWidth="160"/>
+                            <TableColumn fx:id="colApellidos" text="Apellidos" prefWidth="170"/>
+                            <TableColumn fx:id="colDni" text="DNI" prefWidth="90"/>
+                            <TableColumn fx:id="colCorreo" text="Correo" prefWidth="200"/>
+                            <TableColumn fx:id="colTelefono" text="Teléfono" prefWidth="110"/>
+                            <TableColumn fx:id="colInstitucion" text="Institución" prefWidth="180"/>
+                        </columns>
+                    </TableView>
+                </children>
+            </VBox>
+        </HBox>
+    </center>
+
+    <!-- ============================ REGIÓN INFERIOR ============================ -->
+    <bottom>
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="14" right="24" bottom="14" left="24"/>
+            </padding>
+            <Separator styleClass="divider"/>
+            <Label text="Sistema de Gestión de Eventos y Conferencias • Arquitectura MVC + DAO • JavaFX + MySQL + JasperReports" styleClass="footer-label"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
